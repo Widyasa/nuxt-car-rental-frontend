@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .nav-sidebar-wrapper {
+        @apply flex items-center gap-2 text-primary font-medium px-5 py-3 w-full rounded duration-200 hover:text-white hover:bg-primary
+    }
+    .nav-sidebar-wrapper.active {
+        @apply bg-primary text-white
+    }
+    .nav-sidebar-wrapper.active svg path, .nav-sidebar-wrapper:hover svg path {
+        @apply stroke-white
+    }
+    .input-text {
+        @apply bg-[#F4F5FA] placeholder:font-light px-4 py-3 w-full rounded focus:outline-none text-sm
+    }
+    .btn {
+        @apply px-4 py-3 rounded duration-200 text-sm
+    }
+    .btn-primary {
+        @apply bg-primary text-white hover:brightness-110
+    }
+    tbody tr {
+        @apply even:bg-[#F4F5FA]
+    }
+    tbody tr td {
+        @apply py-2 first:rounded-l last:rounded-r
+    }
+    .btn-danger {
+        @apply bg-red-600 text-white hover:brightness-110
+    }
+    .input-auth{
+        @apply py-3 pl-10 pe-3 border border-[#757575] rounded w-full
+    }
+}
