@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       apiUrl: process.env.API_ENDPOINT
     }
   },
-  modules :['@primevue/nuxt-module', '@pinia/nuxt'],
+  modules :['@primevue/nuxt-module', '@pinia/nuxt','@pinia-plugin-persistedstate/nuxt',],
   css: ['~/assets/css/main.css'],
   app:{
     head:{

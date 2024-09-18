@@ -33,4 +33,46 @@
     .input-auth{
         @apply py-3 pl-10 pe-3 border border-[#757575] rounded w-full
     }
+    .card-auth {
+        @apply w-[500px] rounded-xl py-5 px-6 bg-white
+    }
 }
+
+    .pagination-container {
+        display: flex;
+        column-gap: 10px;
+        margin-top: 40px;
+        width: 100%;
+        justify-content: center;
+    }
+    .paginate-buttons {
+        display: flex;
+        font-size: 12px;
+        justify-content: center;
+        align-items: center;
+        height: 32px;
+        width: 32px;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: rgb(242, 242, 242);
+        border: 1px solid rgb(217, 217, 217);
+        color: black;
+    }
+    .paginate-buttons:hover {
+        background-color: #020617;
+        color: white;
+    }
+    .active-page {
+        background-color: #020617;
+        border: 1px solid #020617;
+        color: white;
+    }
+    .active-page:hover {
+        background-color: #020617;
+    }
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+        display: none;
+    }

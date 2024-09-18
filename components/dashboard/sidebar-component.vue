@@ -13,7 +13,10 @@ import SidebarNav from "~/components/dashboard/sidebar-nav.vue";
             <sidebar-nav nav-route="/dashboard" nav-name="Dashboard">
               <i class="fa-solid fa-table-columns"></i>
             </sidebar-nav>
-            <sidebar-nav nav-route="/car-type" nav-name="Car Type">
+            <sidebar-nav nav-route="/dashboard/car-type" nav-name="Car Type">
+              <i class="fa-solid fa-inbox"></i>
+            </sidebar-nav>
+            <sidebar-nav nav-route="/dashboard/car-brand" nav-name="Car Brand">
               <i class="fa-solid fa-inbox"></i>
             </sidebar-nav>
         </div>
