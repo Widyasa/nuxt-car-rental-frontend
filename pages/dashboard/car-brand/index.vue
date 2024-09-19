@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import BaseButton from "~/components/dashboard/base-button.vue";
-import {definePageMeta, useCarTypeStore} from "#imports";
+import {currentPage, definePageMeta, useCarTypeStore} from "#imports";
 import TableComponent from "~/components/dashboard/table-component.vue";
 import Spinner from "~/components/dashboard/spinner.vue";
 import Searchbar from "~/components/dashboard/Searchbar.vue";
@@ -23,15 +23,18 @@ const thead = ['name', 'Aksi']
 const getAll = async () => {
   isLoading.value = true
   try {
-    carType.pages = currentPage.value
     carType.keyword = keyword.value
-    carType.pages = 1
     await carType.getAllCarType()
   } catch (e) {
     console.error(e)
   } finally {
     isLoading.value = false
   }
+}
+function getPaginateData() {
+  console.log('tes')
+  carType.pages = currentPage.value
+  getAll()
 }
 const showSuccess = () => {
   toast.add({ severity: 'success', summary: 'Success', detail: message.value, life: 3000 });
@@ -40,7 +43,7 @@ const getId = (theId:string) => {
   id.value = theId
 }
 await getAll()
-currentPage.value = 1
+// currentPage.value = 1
 const handleKeyword = (data:string) => {
   keyword.value = data
 }
@@ -58,7 +61,7 @@ const handleKeyword = (data:string) => {
       </base-button>
     </div>
     <div class="mt-5">
-      <table-component :table-head="thead" :total-items="carType.totalData" @getData="getAll">
+      <table-component :table-head="thead" :total-items="carType.totalData" @getData="getPaginateData">
         <tr v-if="isLoading">
           <td colspan="6" class="text-center">
             <spinner class="flex justify-center w-full translate-x-[50%]" />

@@ -1,5 +1,3 @@
-
-export const globalKey = ref('')
 export const message = ref('')
 export const imageUrl = 'http://localhost:8000/'
 export const currentPage = ref(1)

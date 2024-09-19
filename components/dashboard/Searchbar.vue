@@ -1,8 +1,6 @@
 <script setup lang="ts">
 
 import BaseInput from "~/components/dashboard/base-input.vue";
-import {globalKey} from "../../utils/globalVariable";
-// const keyword = ref('')
 const props = defineProps([ 'getFunction'])
 const emit = defineEmits(['searchData'])
 const keyword = ref('')

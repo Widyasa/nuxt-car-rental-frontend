@@ -10,17 +10,10 @@ export const useAuthStore = defineStore('useAuthStore', {
     actions : {
         async login (loginData: any) {
             const config = useRuntimeConfig()
-            // const test = await $fetch('http://localhost:8000/sanctum/csrf-cookie', {
-            //     method: 'get',
-            // })
-            // console.log(browsercookies.get('XSRF-TOKEN'))
             try {
                 const response:Auth = await $fetch(config.public.apiUrl + 'login', {
                     method: 'post',
                     body: loginData,
-                    // headers: {
-                    // 'X-XSRF-TOKEN': getCookie('XSRF-TOKEN') // Get the CSRF token from the cookie
-                    // }
                 })
                 console.log(response)
                 this.loginOutput = response

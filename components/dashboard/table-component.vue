@@ -11,6 +11,7 @@ const props = defineProps([
 ])
 const emit = defineEmits(['getData'])
 const onClickHandler = (page:any) => {
+  console.log('tes handler')
   currentPage.value = page
   emit('getData')
 };
@@ -34,7 +35,7 @@ const onClickHandler = (page:any) => {
       :items-per-page="10"
       :max-pages-shown="4"
       v-model="currentPage"
-      :on-click="onClickHandler"
+      @click="onClickHandler"
   />
 </template>
 
