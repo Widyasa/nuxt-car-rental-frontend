@@ -7,7 +7,7 @@ const props = defineProps({
   'inputStep' : String,
   'inputPlaceholder' : String,
   'inputType' : String,
-  'modelValue' :  { type : [String, Number], default: ''},
+  'modelValue' :  { type : [String, Number]},
   'customClass': [String],
   'readOnly' : Boolean,
   'required' : Boolean
@@ -15,25 +15,17 @@ const props = defineProps({
 function preventScrollChange(event:any) {
   event.preventDefault();
 }
-const emit = defineEmits(['update:modelValue']);
-const name = toRef(props, 'inputName');
-const {
-  value: inputValue,
-} = useField(name, undefined, {
-  initialValue: props.modelValue,
-});
-watchEffect(() => {
-  inputValue.value = props.modelValue;
-});
+
+
 </script>
 
 <template>
   <div class="flex flex-col gap-1 w-full">
     <label :for="props.inputName">{{props.inputTitle}}</label>
-    <VeeField :validate-on-input="false" :step="inputStep" @wheel="preventScrollChange" :required="props.required" :readonly="props.readOnly" :class="props.customClass" :name="props.inputName" :type="props.inputType" class="input-text" :placeholder="props.inputPlaceholder"></VeeField>
-    <p class="text-red-500 text-[13px]" v-if="errorMessage">
-      {{ errorMessage }}
-    </p>
+    <VeeField :validate-on-change="true" :validate-on-input="false" :name="props.inputName" v-slot="{ field }">
+      <input v-bind="field" :step="inputStep" @wheel="preventScrollChange" :required="props.required" :readonly="props.readOnly" :class="props.customClass" :name="props.inputName" :type="props.inputType" class="input-text" :placeholder="props.inputPlaceholder" @input="$emit('update:modelValue', $event.target.value)" :value="props.modelValue"/>
+    </VeeField>
+    <vee-error-message :name="props.inputName" class="text-red-500 text-[13px]"/>
   </div>
 </template>
 

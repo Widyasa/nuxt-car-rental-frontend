@@ -9,7 +9,8 @@ export const useCarStore = defineStore('useCarStore', {
         keyword: ref(''),
         // metaData : {},
         totalData : 0,
-        isSuccess: ref(false)
+        isSuccess: ref(false),
+        response : {}
     }),
     actions : {
         async getAllCar() {
@@ -52,6 +53,7 @@ export const useCarStore = defineStore('useCarStore', {
                     body: data,
                     headers: {'Authorization': `Bearer ${auth.loginOutput.data.data.token}`}
                 })
+                this.response = reponse.data[0]
                 this.isSuccess = response.success
                 message.value = response.message
                 this.getAllCar()
@@ -69,9 +71,24 @@ export const useCarStore = defineStore('useCarStore', {
                     body: data,
                     headers: {'Authorization': `Bearer ${auth.loginOutput.data.data.token}`}
                 })
+                this.response = reponse.data[0]
                 this.isSuccess = response.success
                 message.value = response.message
                 this.getAllCar()
+            } catch (e) {
+                console.error(e)
+            }
+        },
+        async uploadImage(data: any, id:string) {
+            const config = useRuntimeConfig()
+            const auth = useAuthStore()
+            try {
+                const response:any = await $fetch(config.public.apiUrl + `doctors/upload/${id}`, {
+                    method: 'POST',
+                    body: data,
+                    headers: {'Authorization': `Bearer ${auth.loginOutput.data.token}`}
+                })
+                console.log(response)
             } catch (e) {
                 console.error(e)
             }

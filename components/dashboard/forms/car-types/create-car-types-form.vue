@@ -10,12 +10,12 @@ const isLoading = ref(false)
 const emit = defineEmits(['actionSuccess'])
 const carType = useCarTypeStore()
 const createData = async (values) => {
+  console.log(values)
   isLoading.value = true
   await carType.createCarType(values)
   if (carType.isSuccess == true) {
     carType.isSuccess = false
     emit('actionSuccess')
-    inputData.name = ''
   }
   isLoading.value = false
 }
