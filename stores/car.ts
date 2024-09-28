@@ -53,7 +53,7 @@ export const useCarStore = defineStore('useCarStore', {
                     body: data,
                     headers: {'Authorization': `Bearer ${auth.loginOutput.data.data.token}`}
                 })
-                this.response = reponse.data[0]
+                this.response = response.data[0]
                 this.isSuccess = response.success
                 message.value = response.message
                 this.getAllCar()
@@ -71,7 +71,7 @@ export const useCarStore = defineStore('useCarStore', {
                     body: data,
                     headers: {'Authorization': `Bearer ${auth.loginOutput.data.data.token}`}
                 })
-                this.response = reponse.data[0]
+                this.response = response.data[0]
                 this.isSuccess = response.success
                 message.value = response.message
                 this.getAllCar()
@@ -79,16 +79,16 @@ export const useCarStore = defineStore('useCarStore', {
                 console.error(e)
             }
         },
-        async uploadImage(data: any, id:string) {
+        async uploadImage(data: any, id:number) {
             const config = useRuntimeConfig()
             const auth = useAuthStore()
             try {
-                const response:any = await $fetch(config.public.apiUrl + `doctors/upload/${id}`, {
+                const response:any = await $fetch(config.public.apiUrl + `car/upload/${id}`, {
                     method: 'POST',
                     body: data,
-                    headers: {'Authorization': `Bearer ${auth.loginOutput.data.token}`}
+                    headers: {'Authorization': `Bearer ${auth.loginOutput.data.data.token}`}
                 })
-                console.log(response)
+                    console.log(response)
             } catch (e) {
                 console.error(e)
             }

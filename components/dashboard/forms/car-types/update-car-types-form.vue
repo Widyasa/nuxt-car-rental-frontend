@@ -11,6 +11,7 @@ const isLoading = ref(false)
 const props = defineProps(['id', 'isLoading'])
 const emit = defineEmits(['actionSuccess'])
 const updateData = async (values) => {
+  console.log(values)
   isLoading.value = true
   await carType.updateCarType(values, props.id)
   if (carType.isSuccess == true) {

@@ -5,6 +5,7 @@ import {currentPage, definePageMeta} from "#imports";
 import Searchbar from "~/components/dashboard/Searchbar.vue";
 import {useCarStore} from "~/stores/car";
 import CarTable from "~/components/dashboard/tables/car-table.vue";
+import CarModal from "~/components/dashboard/modals/car-modal.vue";
 definePageMeta({
   layout: 'dashboard-layout',
   name: 'Car',
@@ -53,8 +54,8 @@ const modalSuccessAction = () => {
 <template>
   <div class="p-10 bg-white rounded-xl">
     <div class="flex gap-3 items-center">
-      <Searchbar @searchData="handleKeyword" :get-function="getCar"/>
-      <nuxt-link to="/dashboard/car/create.vue">
+      <Searchbar @searchData="handleKeyword" :get-function="getAll"/>
+      <nuxt-link to="/dashboard/car/create">
         <base-button custom-class="btn-primary flex gap-3 items-center">
           <i class="fa-regular fa-square-plus text-white"></i>
           <div class="w-max">
@@ -74,7 +75,7 @@ const modalSuccessAction = () => {
       />
     </div>
   </div>
-<!--  <car-modal v-model:visible="visibleModal" :modalAction="modalAction" @actionSuccess="modalSuccessAction" :id="id"/>-->
+  <car-modal v-model:visible="visibleModal" :modalAction="modalAction" @actionSuccess="modalSuccessAction" :id="id"/>
 </template>
 <style scoped>
 </style>
