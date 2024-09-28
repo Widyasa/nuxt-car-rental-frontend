@@ -12,7 +12,7 @@ const deleteData = async () => {
 </script>
 
 <template>
-  <p>
+  <p class="normal-case">
     Confirm Deletion of car type: Are you sure you want to delete this car type permanently? If you are sure, please click the delete button, otherwise you can cancel by clicking the cross above
   </p>
   <div class="flex justify-end gap-2 w-full mt-3">

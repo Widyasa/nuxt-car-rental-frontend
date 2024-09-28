@@ -9,7 +9,7 @@ export default defineNuxtConfig({
       apiUrl: process.env.API_ENDPOINT
     }
   },
-  modules :['@primevue/nuxt-module', '@pinia/nuxt','@pinia-plugin-persistedstate/nuxt',],
+  modules :['@primevue/nuxt-module', '@pinia/nuxt','@pinia-plugin-persistedstate/nuxt', '@vee-validate/nuxt',],
   css: ['~/assets/css/main.css'],
   app:{
     head:{
@@ -40,5 +40,16 @@ export default defineNuxtConfig({
         }
       }
     }
-  }
+  },
+  veeValidate: {
+    // disable or enable auto imports
+    autoImports: true,
+    // Use different names for components
+    componentNames: {
+      Form: 'VeeForm',
+      Field: 'VeeField',
+      FieldArray: 'VeeFieldArray',
+      ErrorMessage: 'VeeErrorMessage',
+    },
+  },
 })

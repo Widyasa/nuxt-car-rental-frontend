@@ -12,13 +12,15 @@
   "dependencies": {
     "@pinia/nuxt": "^0.5.4",
     "@primevue/themes": "^4.0.5",
+    "@vee-validate/nuxt": "^4.13.2",
     "nuxt": "^3.13.0",
     "pinia": "^2.2.2",
     "pinia-plugin-persistedstate": "^4.0.1",
     "primevue": "^4.0.5",
     "vue": "latest",
     "vue-awesome-paginate": "^1.2.0",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",

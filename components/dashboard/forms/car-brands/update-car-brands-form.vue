@@ -1,34 +1,36 @@
 <script setup lang="ts">
+import {useCarBrandStore} from "#imports";
 import BaseButton from "~/components/dashboard/base-button.vue";
 import SmSpinner from "~/components/dashboard/sm-spinner.vue";
-import { Form } from 'vee-validate';
-import {useCarTypeStore} from "#imports";
 import InputCrud from "~/components/dashboard/input-crud.vue";
-import {carTypeValidation} from "~/validations/carTypeValidation";
-const isLoading = ref(false)
+import {carBrandValidation} from "~/validations/carBrandValidation";
+import Spinner from "~/components/dashboard/spinner.vue";
 
+const carBrand = useCarBrandStore()
+const isLoading = ref(false)
+const props = defineProps(['id', 'isLoading'])
 const emit = defineEmits(['actionSuccess'])
-const carType = useCarTypeStore()
-const createData = async (values) => {
+
+const updateData = async (values) => {
   isLoading.value = true
-  await carType.createCarType(values)
-  if (carType.isSuccess == true) {
-    carType.isSuccess = false
+  await carBrand.updateCarBrand(values, props.id)
+  if (carBrand.isSuccess == true) {
+    carBrand.isSuccess = false
     emit('actionSuccess')
-    inputData.name = ''
   }
   isLoading.value = false
 }
 </script>
 
 <template>
-  <Form @submit="createData" class="bg-white" :validation-schema="carTypeValidation">
+  <VeeForm v-if="props.isLoading == false" @submit="updateData" class="bg-white" :validation-schema="carBrandValidation">
     <div class="grid grid-cols-1 gap-4" >
       <input-crud
+          v-model="carBrand.carBrand.name"
           input-type="text"
-          input-title="Car Type"
+          input-title="Car Brand"
           input-name="name"
-          input-placeholder="input car type..."
+          input-placeholder="input car brand..."
       />
     </div>
     <div class="modal-action">
@@ -39,7 +41,10 @@ const createData = async (values) => {
         </base-button>
       </div>
     </div>
-  </Form>
+  </VeeForm>
+  <div class="flex justify-center" v-else>
+    <spinner />
+  </div>
 </template>
 
 <style scoped>

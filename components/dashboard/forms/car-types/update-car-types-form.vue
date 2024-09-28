@@ -3,18 +3,16 @@ import {useCarTypeStore} from "#imports";
 import BaseButton from "~/components/dashboard/base-button.vue";
 import BaseInput from "~/components/dashboard/base-input.vue";
 import SmSpinner from "~/components/dashboard/sm-spinner.vue";
-
+import InputCrud from "~/components/dashboard/input-crud.vue";
+import {carTypeValidation} from "~/validations/carTypeValidation";
+import Spinner from "~/components/dashboard/spinner.vue";
 const carType = useCarTypeStore()
 const isLoading = ref(false)
-const props = defineProps(['id'])
+const props = defineProps(['id', 'isLoading'])
 const emit = defineEmits(['actionSuccess'])
-
-const updateData = async () => {
-  const inputData = reactive({
-    name : carType.carType.name
-  })
+const updateData = async (values) => {
   isLoading.value = true
-  await carType.updateCarType(inputData, props.id)
+  await carType.updateCarType(values, props.id)
   if (carType.isSuccess == true) {
     carType.isSuccess = false
     emit('actionSuccess')
@@ -24,14 +22,13 @@ const updateData = async () => {
 </script>
 
 <template>
-  <form @submit.prevent="updateData" class="bg-white">
+  <VeeForm v-if="props.isLoading == false" @submit="updateData" class="bg-white" :validation-schema="carTypeValidation">
     <div class="grid grid-cols-1 gap-4" >
-      <base-input
-          required
+      <input-crud
           v-model="carType.carType.name"
           input-type="text"
           input-title="Car Type"
-          input-name="service_type"
+          input-name="name"
           input-placeholder="input car type..."
       />
     </div>
@@ -43,7 +40,10 @@ const updateData = async () => {
         </base-button>
       </div>
     </div>
-  </form>
+  </VeeForm>
+  <div class="flex justify-center" v-else>
+    <spinner />
+  </div>
 </template>
 
 <style scoped>

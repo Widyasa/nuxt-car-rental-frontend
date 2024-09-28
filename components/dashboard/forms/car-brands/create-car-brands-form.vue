@@ -1,34 +1,31 @@
 <script setup lang="ts">
 import BaseButton from "~/components/dashboard/base-button.vue";
 import SmSpinner from "~/components/dashboard/sm-spinner.vue";
-import { Form } from 'vee-validate';
-import {useCarTypeStore} from "#imports";
+import {useCarBrandStore} from "#imports";
+import {carBrandValidation} from "~/validations/carBrandValidation";
 import InputCrud from "~/components/dashboard/input-crud.vue";
-import {carTypeValidation} from "~/validations/carTypeValidation";
 const isLoading = ref(false)
-
 const emit = defineEmits(['actionSuccess'])
-const carType = useCarTypeStore()
+const carBrand = useCarBrandStore()
 const createData = async (values) => {
   isLoading.value = true
-  await carType.createCarType(values)
-  if (carType.isSuccess == true) {
-    carType.isSuccess = false
+  await carBrand.createCarBrand(values)
+  if (carBrand.isSuccess == true) {
+    carBrand.isSuccess = false
     emit('actionSuccess')
-    inputData.name = ''
   }
   isLoading.value = false
 }
 </script>
 
 <template>
-  <Form @submit="createData" class="bg-white" :validation-schema="carTypeValidation">
+  <VeeForm @submit="createData" class="bg-white" :validation-schema="carBrandValidation" validateOnSubmit>
     <div class="grid grid-cols-1 gap-4" >
       <input-crud
           input-type="text"
-          input-title="Car Type"
+          input-title="Car Brand"
           input-name="name"
-          input-placeholder="input car type..."
+          input-placeholder="input car brand..."
       />
     </div>
     <div class="modal-action">
@@ -39,7 +36,7 @@ const createData = async (values) => {
         </base-button>
       </div>
     </div>
-  </Form>
+  </VeeForm>
 </template>
 
 <style scoped>

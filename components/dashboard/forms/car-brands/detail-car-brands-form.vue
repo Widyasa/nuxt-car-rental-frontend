@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import {useCarTypeStore} from "#imports";
-import {carTypeValidation} from "~/validations/carTypeValidation";
-import Spinner from "~/components/dashboard/spinner.vue";
+import {useCarBrandStore} from "#imports";
 import InputCrud from "~/components/dashboard/input-crud.vue";
-const carType = useCarTypeStore()
+import Spinner from "~/components/dashboard/spinner.vue";
+import {carBrandValidation} from "~/validations/carBrandValidation";
+const carBrand = useCarBrandStore()
 const props = defineProps(['isLoading'])
 </script>
 
 <template>
-  <VeeForm v-if="props.isLoading == false" class="bg-white" :validation-schema="carTypeValidation">
+  <VeeForm v-if="props.isLoading == false" class="bg-white" :validation-schema="carBrandValidation">
     <div class="grid grid-cols-1 gap-4" >
       <input-crud
           read-only
-          v-model="carType.carType.name"
+          v-model="carBrand.carBrand.name"
           input-type="text"
           input-title="Car Type"
           input-name="name"

@@ -8,23 +8,26 @@ import DeleteCarTypesForm from "~/components/dashboard/forms/car-types/delete-ca
 const carType = useCarTypeStore()
 const emit = defineEmits(['actionSuccess'])
 const props = defineProps(['modalAction', 'id'])
+const processLoad = ref(true)
 watch(() => props.id, async (newValue, oldValue) => {
   if (newValue) {
+    processLoad.value = true
     await carType.getCarTypeById(props.id);
+    processLoad.value = false
   }
 })
 </script>
 
 <template>
-  <Dialog modal :header=" props.modalAction + ' Car Type'" class="w-[600px] capitalize">
+  <Dialog modal :header=" props.modalAction + ' Car Type'" class="w-[600px] capitalize" :draggable=false>
     <div v-if="modalAction == 'create'">
       <create-car-types-form @actionSuccess="emit('action-success')" />
     </div>
     <div v-if="modalAction == 'detail'">
-      <detail-car-types-form :id="id"/>
+      <detail-car-types-form :is-loading="processLoad"/>
     </div>
     <div v-if="modalAction == 'update'">
-      <update-car-types-form @actionSuccess="emit('action-success')" :id="id"/>
+      <update-car-types-form @actionSuccess="emit('action-success')" :id="id" :is-loading="processLoad"/>
     </div>
     <div v-if="modalAction == 'delete'">
       <delete-car-types-form @actionSuccess="emit('action-success')" :id="id"/>

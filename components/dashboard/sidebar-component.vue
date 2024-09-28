@@ -19,6 +19,9 @@ import SidebarNav from "~/components/dashboard/sidebar-nav.vue";
             <sidebar-nav nav-route="/dashboard/car-brand" nav-name="Car Brand">
               <i class="fa-solid fa-inbox"></i>
             </sidebar-nav>
+            <sidebar-nav nav-route="/dashboard/car" nav-name="Car">
+              <i class="fa-solid fa-inbox"></i>
+            </sidebar-nav>
         </div>
       </div>
     </div>

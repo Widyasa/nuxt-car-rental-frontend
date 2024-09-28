@@ -1,13 +1,11 @@
 <script setup lang="ts">
-definePageMeta({
-  redirect: '/home'
-})
+
 </script>
 
 <template>
 
 </template>
-
+<p>ini halaman home</p>
 <style scoped>
 
 </style>
