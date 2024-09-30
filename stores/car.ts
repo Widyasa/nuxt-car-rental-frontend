@@ -39,7 +39,7 @@ export const useCarStore = defineStore('useCarStore', {
                     method: 'GET',
                     headers: {'Authorization': `Bearer ${auth.loginOutput.data.data.token}`}
                 })
-                this.car = data[0]
+                this.car = data.data
             } catch (e) {
                 console.error(e)
             }
@@ -71,6 +71,7 @@ export const useCarStore = defineStore('useCarStore', {
                     body: data,
                     headers: {'Authorization': `Bearer ${auth.loginOutput.data.data.token}`}
                 })
+                console.log(response)
                 this.response = response.data[0]
                 this.isSuccess = response.success
                 message.value = response.message

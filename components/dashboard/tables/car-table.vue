@@ -28,12 +28,16 @@ const thead = ['name', 'brand', 'price', 'status', 'image', 'action']
           <img :src="`http://localhost:8000/${item.image}`" :alt="item.name + 'image'" class="aspect-video object-cover w-[200px]">
         </td>
         <td class="flex gap-3">
-          <button @click="emit('viewDetail'); emit('getId', item.id)" class="bg-[#547DE2] bg-opacity-20 w-8 h-8 flex justify-center items-center rounded">
-            <i class="fa-regular fa-eye text-[#547DE2]"></i>
-          </button>
-          <button @click="emit('viewUpdate'); emit('getId', item.id)"  class="bg-[#F6C46A] bg-opacity-20 w-8 h-8 flex justify-center items-center rounded">
-            <i class="fa-regular fa-pen-to-square text-[#F6C46A]"></i>
-          </button>
+          <nuxt-link :to="'/dashboard/car/' + item.id">
+            <button class="bg-[#547DE2] bg-opacity-20 w-8 h-8 flex justify-center items-center rounded">
+              <i class="fa-regular fa-eye text-[#547DE2]"></i>
+            </button>
+          </nuxt-link>
+          <nuxt-link :to="'/dashboard/car/update/' + item.id">
+            <button  class="bg-[#F6C46A] bg-opacity-20 w-8 h-8 flex justify-center items-center rounded">
+              <i class="fa-regular fa-pen-to-square text-[#F6C46A]"></i>
+            </button>
+          </nuxt-link>
           <button  @click="emit('viewDelete'); emit('getId', item.id)" class="bg-red-500 bg-opacity-20 w-8 h-8 flex justify-center items-center rounded">
             <i class="fa-solid fa-trash text-red-500"></i>
           </button>

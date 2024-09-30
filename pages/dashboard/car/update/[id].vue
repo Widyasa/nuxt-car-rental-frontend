@@ -1,13 +1,16 @@
 <script setup lang="ts">
-
-import CreateCarForm from "~/components/dashboard/forms/car/create-car-form.vue";
+import UpdateCarForm from "~/components/dashboard/forms/car/update-car-form.vue";
 definePageMeta({
   layout:'dashboard-layout',
-  name: 'Create Car',
+  name: 'Update Car',
   middleware: 'auth'
 })
+const route = useRoute()
+const id = route.params.id
+const car = useCarStore()
 const carType = useCarTypeStore()
 const carBrand = useCarBrandStore()
+await car.getCarById(id)
 await carType.getAllCarType()
 await carBrand.getAllCarBrand()
 const status = ref(['active', 'booked', 'inactive'])
@@ -19,8 +22,11 @@ const showSuccess = () => {
 
 <template>
   <div class="p-10 bg-white rounded-xl">
-    <create-car-form :car-status="status" @actionSuccess="showSuccess"/>
+    <div class="" v-if="car.car !== undefined">
+      <update-car-form :id="id" :car-status="status" @actionSuccess="showSuccess"/>
+    </div>
   </div>
+
 </template>
 
 <style scoped>

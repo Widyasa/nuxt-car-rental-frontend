@@ -8,4 +8,7 @@ export const carValidation = yup.object().shape({
     price_per_day: yup.number().required('price per day is required').moreThan(0),
     car_status: yup.mixed().required('car status is required'),
     description: yup.string().required('description is required'),
+    image: yup.mixed().required('image is required'),
 })
+
+// export const carValidationUpdate

@@ -3,9 +3,8 @@
 </script>
 
 <template>
-
+  <p>ini halaman home</p>
 </template>
-<p>ini halaman home</p>
 <style scoped>
 
 </style>

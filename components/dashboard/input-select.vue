@@ -14,12 +14,16 @@ const props = defineProps({
 function preventScrollChange(event:any) {
   event.preventDefault();
 }
+const selectValue = ref()
+if (props.modelValue !== undefined) {
+  selectValue.value = props.modelValue
+}
 </script>
 
 <template>
   <div class="flex flex-col gap-1 w-full">
     <label :for="props.inputName">{{props.inputTitle}}</label>
-    <VeeField :name="props.inputName"  v-slot="{ field }">
+    <VeeField :name="props.inputName"  v-slot="{ field }"  :value="selectValue.value">
       <Select
           :model-value="props.modelValue"
           :options="props.options"
@@ -29,8 +33,8 @@ function preventScrollChange(event:any) {
           v-bind="field"
           :placeholder="props.inputPlaceholder"
           class="w-full input-text text-sm p-1"
-          @input="$emit('update:modelValue', $event.value); field.value = $event.value"
           @change="$emit('update:modelValue', $event.value);  field.value = $event.value"
+          @input="$emit('update:modelValue', $event.value);  field.value = $event.value"
       />
     </VeeField>
     <vee-error-message :name="props.inputName" class="text-red-500 text-[13px]"/>
